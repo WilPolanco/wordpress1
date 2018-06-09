@@ -243,9 +243,9 @@ class WeglotUtils
 
     public static function is_AJAX_HTML($string)
     {
-        $r = preg_match_all('/<(a|div|span|p|i|aside|input|textarea|select|h1|h2|h3|h4|meta|button|form|li|strong|ul)/',
+        $r = preg_match_all('/<(a|div|span|p|i|aside|input|textarea|select|h1|h2|h3|h4|meta|button|form|li|strong|ul|option)/',
             $string, $m, PREG_PATTERN_ORDER);
-        if (isset($string[0]) && $string[0] != '{' && $r && $r >= 2) {
+        if (isset($string[0]) && $string[0] != '{' && $r && $r >= 1) {
             return true;
         } else {
             return false;
