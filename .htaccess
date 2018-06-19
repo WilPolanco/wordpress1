@@ -1,14 +1,12 @@
-
-# BEGIN WordPress
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteBase /wordpress/
-	RewriteRule ^/wordpress/wp-content/hostinger-page-cache/ - [L]
+	RewriteBase /
+	RewriteRule ^/wp-content/hostinger-page-cache/ - [L]
 	RewriteCond %{REQUEST_METHOD} !POST
 	RewriteCond %{QUERY_STRING} !.*=.*
 	RewriteCond %{HTTP_COOKIE} !(wordpress_test_cookie|comment_author|wp\-postpass|wordpress_logged_in|wptouch_switch_toggle|wp_woocommerce_session_) [NC]
-	RewriteCond %{DOCUMENT_ROOT}/wordpress/wp-content/hostinger-page-cache/$1/_index.html -f
-	RewriteRule ^(.*)$ /wordpress/wp-content/hostinger-page-cache/$1/_index.html [L]
+	RewriteCond %{DOCUMENT_ROOT}/wp-content/hostinger-page-cache/$1/_index.html -f
+	RewriteRule ^(.*)$ /wp-content/hostinger-page-cache/$1/_index.html [L]
 </IfModule>
 <IfModule mod_expires.c>
 	ExpiresActive On
@@ -24,11 +22,14 @@
 </IfModule>
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /wordpress/
+RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /wordpress/index.php [L]
+RewriteRule . /index.php [L]
+
+#Redirect all www traffic to the non-www version of site añadido por edgardo 17062018
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 </IfModule>
 
-# END WordPress
